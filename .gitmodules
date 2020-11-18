@@ -1,3 +1,6 @@
 [submodule "leetcode"]
 	path = leetcode
 	url = https://gitee.com/winnochan/leetcode.git
+[submodule "blog"]
+	path = blog
+	url = https://gitee.com/winnochan/winnochan.git
