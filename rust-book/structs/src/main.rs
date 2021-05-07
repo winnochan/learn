@@ -29,7 +29,10 @@ fn main() {
     println!("{}", area_tuple((12, 12)));
 
     let rec = Rec { w: 12, h: 12 };
-    println!("{:#?}: {}, {}", rec, area_structs(&rec), rec.area());
+    println!("{}, {}", area_structs(&rec), rec.area());
+    println!("{:#?}", rec);
+
+    println!("{}", rec.can_hold(&Rec::square(10)));
 }
 
 fn build_user(email: String, username: String) -> User {
@@ -61,11 +64,6 @@ impl Display for User {
 struct Color(u16, u16, u16);
 struct Point(i32, i32, i32);
 struct Null();
-#[derive(Debug)]
-struct Rec {
-    w: u32,
-    h: u32,
-}
 
 impl Display for Color {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
@@ -103,8 +101,20 @@ fn area_structs(rec: &Rec) -> u32 {
     rec.w * rec.h
 }
 
+#[derive(Debug)]
+struct Rec {
+    w: u32,
+    h: u32,
+}
+
 impl Rec {
     fn area(&self) -> u32 {
         self.w * self.h
+    }
+    fn can_hold(&self, other: &Rec) -> bool {
+        self.w > other.w && self.h > other.h
+    }
+    fn square(size: u32) -> Rec {
+        Rec { w: size, h: size }
     }
 }
