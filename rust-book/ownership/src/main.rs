@@ -46,17 +46,39 @@ fn main() {
     let r2 = &mut s;
     println!("{}", r2);
 
-    let r1 = &s; // no problem
-    let r2 = &s; // no problem
-                 // let r3 = &mut s;
+    let r1 = &s;
+    let r2 = &s;
+    // let r3 = &mut s;
     println!("{}, {}", r1, r2);
     let r3 = &mut s;
     println!("{}", r3);
 
     let mut s = String::from("hello world");
-    let word = first_word(&s); // word will get the value 5
+    // word will get the value 5
+    let word = first_word(&s);
     s.clear();
     println!("{},{}", s, word);
+
+    let s = String::from("hello world");
+    let hello = &s[0..5];
+    let world = &s[6..11];
+    println!("first word: {}, {}", hello, world);
+
+    let mut s = String::from("hello world");
+    // word will get the value 5
+    let word = first_word2(&s);
+    // s.clear();
+    println!("first word2: {}, {}", s, word);
+    s.clear();
+
+    let s = String::from("hello world");
+    // word will get the value 5
+    let word = first_word3(&s);
+    // s.clear();
+    println!("first word3: {}, {}", s, word);
+
+    // let a = [1, 2, 3, 4, 5];
+    // let aslice = &a[1..3];
 }
 
 fn takes_ownership(s: String) {
@@ -92,4 +114,24 @@ fn first_word(s: &String) -> usize {
         }
     }
     s.len()
+}
+
+fn first_word2(s: &String) -> &str {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[..i];
+        }
+    }
+    &s[..]
+}
+
+fn first_word3(s: &str) -> &str {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[..i];
+        }
+    }
+    &s[..]
 }
