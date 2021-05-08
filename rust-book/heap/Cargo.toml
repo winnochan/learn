@@ -1,0 +1,13 @@
+[package]
+name = "heap"
+version = "0.1.0"
+authors = ["winnochan <winnochan@icloud.com>"]
+edition = "2018"
+
+[profile.release]
+lto = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+chrono = "0.4"
