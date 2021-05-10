@@ -1,3 +1,5 @@
+pub use std::io::Result as IoResult;
+
 pub mod house {
     #[derive(Debug)]
     pub struct BreakFirst {
