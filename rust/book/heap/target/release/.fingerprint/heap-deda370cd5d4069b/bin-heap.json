@@ -1,0 +1,1 @@
+{"rustc":6352663442387760550,"features":"[]","target":1570225589325679151,"profile":2981669385588978802,"path":1036222786711178230,"deps":[[8146038286185888119,"chrono",false,11860514051981585750]],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/heap-deda370cd5d4069b/dep-bin-heap"}}],"rustflags":[],"metadata":16202441862516035716,"config":0,"compile_kind":0}
