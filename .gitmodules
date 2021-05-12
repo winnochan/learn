@@ -7,3 +7,6 @@
 [submodule "mooc"]
 	path = mooc
 	url = https://gitee.com/winnochan/mooc.git
+[submodule "actix"]
+	path = actix
+	url = https://gitee.com/mirrors/Actix.git
