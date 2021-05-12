@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 fn main() {
     let number_list = vec![34, 50, 25, 100, 65];
 
@@ -33,6 +35,24 @@ fn main() {
     notify2(&article);
     notify3(&article);
     notify3(&returns_summarizable());
+
+    println!("{}", longest("abd", "12354"));
+
+    let novel = String::from("Call me Ishmael. Some years ago...");
+    let first_sentence = novel.split('.').next().expect("Could not find a '.'");
+    let i = ImportantExcerpt {
+        part: first_sentence,
+    };
+    println!(
+        "i={:?},level={},announcement={}",
+        i,
+        i.level(),
+        i.announce_and_return_part("abc")
+    );
+    println!(
+        "{}",
+        longest_with_an_announcement("abcd", "123", "hello generic")
+    );
 }
 
 fn largest_i32(list: &[i32]) -> i32 {
@@ -119,5 +139,40 @@ fn returns_summarizable() -> impl Summary {
         content: String::from("of course, as you probably already know, people"),
         reply: false,
         retweet: false,
+    }
+}
+
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+
+#[derive(Debug)]
+struct ImportantExcerpt<'a> {
+    part: &'a str,
+}
+
+impl<'a> ImportantExcerpt<'a> {
+    fn level(&self) -> i32 {
+        3
+    }
+    fn announce_and_return_part(&self, announcement: &str) -> &str {
+        println!("Attention please: {}", announcement);
+        self.part
+    }
+}
+
+fn longest_with_an_announcement<'a, T>(x: &'a str, y: &'a str, ann: T) -> &'a str
+where
+    T: Display,
+{
+    println!("Accouncement! {}", ann);
+    if x.len() > y.len() {
+        x
+    } else {
+        y
     }
 }
