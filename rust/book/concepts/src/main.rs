@@ -1,7 +1,10 @@
 fn main() {
     let a = 5;
     let b = &&&a;
-    println!("The reference value of a is: {}", b);
+    let &&&(mut c) = b;
+    let d = c;
+    c = 6;
+    println!("The reference value of a is: {}, {}, {}", b, c, d);
 
     // immutable
     let x = 5;
