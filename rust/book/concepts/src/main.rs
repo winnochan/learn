@@ -1,4 +1,8 @@
 fn main() {
+    let a = 5;
+    let b = &&&a;
+    println!("The reference value of a is: {}", b);
+
     // immutable
     let x = 5;
     println!("The value of x is: {}", x);
