@@ -11,3 +11,4 @@ lto = true
 
 [dependencies]
 chrono = "0.4"
+rand = "0.8"
