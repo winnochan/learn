@@ -1,15 +1,21 @@
 use std::{thread, time::Duration};
 
 fn main() {
-    thread::spawn(|| {
-        for i in 1..10 {
-            println!("hi number {} from the spawned thread!", i);
-            thread::sleep(Duration::from_secs(1));
+    let v = vec![-3, -2, -1];
+    let mut c = 0;
+    let handle = thread::spawn(move || {
+        for _ in 1..10 {
+            c += 1;
+            println!("hi number {} from the spawned thread!, v={:?}", c, v);
+            thread::sleep(Duration::from_millis(1));
         }
     });
 
-    for i in 1..5 {
-        println!("hi number {} from the main thread!", i);
-        thread::sleep(Duration::from_secs(1));
-    }
+    // for _ in 1..5 {
+    //     c += 1;
+    //     println!("hi number {} from the main thread! v={:?}", c, v);
+    //     thread::sleep(Duration::from_millis(1));
+    // }
+
+    handle.join().unwrap();
 }
