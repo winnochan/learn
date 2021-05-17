@@ -1,6 +1,6 @@
-use std::{fmt::Display, ops::Deref};
-
+use std::{fmt::Display, ops::Deref, rc::Rc};
 use List::{Cons, Null};
+use Node::{Next, None};
 
 fn main() {
     let b = Box::new(5);
@@ -16,12 +16,33 @@ fn main() {
 
     let m = MyBox::new(String::from("Rust"));
     hello(&m);
+
+    let a = Rc::new(Next(5, Rc::new(Next(10, Rc::new(None)))));
+    let b = Next(3, Rc::clone(&a));
+    let c = Next(4, Rc::clone(&a));
+    println!("a={:?},b={:?},c={:?}", a, b, c);
+
+    let a = Rc::new(Next(5, Rc::new(Next(10, Rc::new(None)))));
+    println!("count after creating a = {}", Rc::strong_count(&a));
+    let b = Next(3, Rc::clone(&a));
+    println!("count after creating b {:?} = {}", b, Rc::strong_count(&a));
+    {
+        let c = Next(4, Rc::clone(&a));
+        println!("count after creating c {:?} = {}", c, Rc::strong_count(&a));
+    }
+    println!("count after c goes out of scope = {}", Rc::strong_count(&a));
 }
 
 #[derive(Debug)]
 enum List {
     Cons(i32, Box<List>),
     Null,
+}
+
+#[derive(Debug)]
+enum Node {
+    Next(i32, Rc<Node>),
+    None,
 }
 
 #[derive(Debug)]
