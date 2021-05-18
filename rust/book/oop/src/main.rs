@@ -1,5 +1,5 @@
 mod lib;
-use crate::lib::{AveragedCollection, Button, Screen, SelectBox};
+use crate::lib::{AveragedCollection, Button, Post, Screen, SelectBox};
 
 fn main() {
     let mut a = AveragedCollection::new();
@@ -29,4 +29,7 @@ fn main() {
         ],
     };
     screen.run();
+
+    // let mut post = Post::new();
+    // println!("post={:?}", post);
 }
