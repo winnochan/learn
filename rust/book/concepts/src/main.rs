@@ -1,4 +1,14 @@
 fn main() {
+    let names = vec!["Bob", "Frank", "Ferris"];
+    let t = names[0];
+    for name in names.iter() {
+        match name {
+            &"Ferris" => println!("There is a rustacean among us!"),
+            &v => println!("Hello {}", v),
+        }
+    }
+    println!("names: {:?}, {}", names, t);
+
     let a = 5;
     let b = &&&a;
     let &&&(mut c) = b;
