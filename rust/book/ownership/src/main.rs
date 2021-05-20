@@ -79,6 +79,54 @@ fn main() {
 
     // let a = [1, 2, 3, 4, 5];
     // let aslice = &a[1..3];
+
+    let mut count = 0;
+    let mut inc = move || {
+        count += 1;
+        println!("count={}", count);
+    };
+    inc();
+    inc();
+    println!("count={}", count);
+
+    let greeting = "hello";
+    // A non-copy type.
+    // `to_owned` creates owned data from borrowed one
+    let mut farewell = "goodbye".to_owned();
+
+    let diary = || {
+        // `greeting` is by reference: requires `Fn`.
+        println!("I said {}.", greeting);
+
+        // Mutation forces `farewell` to be captured by
+        // mutable reference. Now requires `FnMut`.
+        farewell.push_str("!!!");
+        println!("Then I screamed {}.", farewell);
+        println!("Now I can sleep. zzzzz");
+
+        // Manually calling drop forces `farewell` to
+        // be captured by value. Now requires `FnOnce`.
+        // use std::mem;
+        // mem::drop(farewell);
+    };
+    apply(diary);
+
+    let double = |x| 2 * x;
+    println!("3 doubled: {}", apply_to_3(double));
+}
+
+fn apply<F>(f: F)
+where
+    F: FnOnce(),
+{
+    f();
+}
+
+fn apply_to_3<F>(f: F) -> i32
+where
+    F: Fn(i32) -> i32,
+{
+    f(3)
 }
 
 fn takes_ownership(s: String) {
