@@ -59,6 +59,17 @@ fn main() {
     if let Some(0) = some_u8_value {
         println!("zero");
     }
+
+    let r = Refer { val: 123 };
+    match r {
+        ref v => println!("v={:?}", v),
+    }
+    println!("r={:?}", r);
+}
+
+#[derive(Debug)]
+struct Refer {
+    val: i32,
 }
 
 #[derive(Debug)]
