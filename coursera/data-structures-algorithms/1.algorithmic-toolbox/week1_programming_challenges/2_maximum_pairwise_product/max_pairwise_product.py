@@ -5,7 +5,7 @@ def max_pairwise_product(numbers):
     for i in range(n):
         if numbers[i] > numbers[first]:
             first = i
-    second = 0
+    second = 0 if first > 0 else 1
     for i in range(n):
         if i != first and numbers[i] > numbers[second]:
             second = i
