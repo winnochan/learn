@@ -1,6 +1,3 @@
 [submodule "blog"]
 	path = blog
 	url = https://gitee.com/winnochan/winnochan.git
-[submodule "actix"]
-	path = rust/actix
-	url = https://gitee.com/mirrors/Actix.git
