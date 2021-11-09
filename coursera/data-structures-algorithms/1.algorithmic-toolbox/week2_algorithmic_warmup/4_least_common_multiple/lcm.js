@@ -1,5 +1,3 @@
-// by Alexander Nikolskiy
-
 const readline = require("readline");
 const rl = readline.createInterface({
   input: process.stdin,
@@ -14,7 +12,7 @@ function readLine(line) {
     const a = parseInt(line.toString().split(" ")[0], 10);
     const b = parseInt(line.toString().split(" ")[1], 10);
 
-    console.log(gcd(a, b));
+    console.log(lcm(a, b));
     process.exit();
   }
 }
@@ -25,4 +23,8 @@ function gcd(a, b) {
   return gcd(b, a % b);
 }
 
-module.exports = gcd;
+function lcm(a, b) {
+  return (a / gcd(a, b)) * b;
+}
+
+module.exports = lcm;
