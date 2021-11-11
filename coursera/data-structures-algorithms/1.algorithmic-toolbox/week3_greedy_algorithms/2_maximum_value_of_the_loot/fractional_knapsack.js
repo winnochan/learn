@@ -34,7 +34,20 @@ function readLine(line) {
 }
 
 function max(count, capacity, values, weights) {
-    // write your code here
+  let val = 0;
+  units = values.map((v, i) => [v / weights[i], i]).sort();
+  while (units.length) {
+    if (capacity <= 0) break;
+    const [unit, index] = units.pop();
+    if (weights[index] <= capacity) {
+      capacity -= weights[index];
+      val += values[index];
+    } else {
+      val += values[index] * capacity / weights[index];
+      capacity = 0;
+    }
+  }
+  return val.toFixed(4);
 }
 
 module.exports = max;

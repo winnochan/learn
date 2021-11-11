@@ -2,8 +2,8 @@
 import sys
 
 
-def compute_min_refills(distance, tank, stops):
-    # write your code here
+def compute_min_refills(d, m, stops):
+    n = len(stops)
     return -1
 
 if __name__ == '__main__':

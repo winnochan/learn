@@ -5,7 +5,8 @@ import sys
 def largest_number(a):
     #write your code here
     res = ""
-    for x in a:
+    a.sort()
+    for x in reversed(a):
         res += x
     return res
 
@@ -14,4 +15,3 @@ if __name__ == '__main__':
     data = input.split()
     a = data[1:]
     print(largest_number(a))
-    
