@@ -1,5 +1,3 @@
-// by Alexander Nikolskiy
-
 const readline = require("readline");
 const rl = readline.createInterface({
   input: process.stdin,
@@ -15,13 +13,13 @@ rl.once("line", (line) => {
     const a = line
       .toString()
       .split(" ")
-      .map((s) => +s);
+      .map((s) => +s.trim());
 
     rl.once("line", (line) => {
       const b = line
         .toString()
         .split(" ")
-        .map((s) => +s);
+        .map((s) => +s.trim());
       console.log(dotProduct(n, a, b));
       process.exit();
     });
@@ -29,8 +27,9 @@ rl.once("line", (line) => {
 });
 
 function dotProduct(n, a, b) {
-  a.sort();
-  b.sort();
+  a.sort((x, y) => x - y);
+  b.sort((x, y) => x - y);
+  // console.log(a, b);
   const an = [];
   const ap = [];
   const bn = [];
@@ -54,6 +53,8 @@ function dotProduct(n, a, b) {
 
   an.reverse();
   bn.reverse();
+
+  // console.log(an, ap, bn, bp);
   while (an.length && bp.length) ret += an.pop() * bp.pop();
   while (ap.length && bn.length) ret += ap.pop() * bn.pop();
 
