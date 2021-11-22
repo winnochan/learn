@@ -1,49 +1,51 @@
 // by Alexander Nikolskiy
 
-const readline = require('readline');
+const readline = require("readline");
 const rl = readline.createInterface({
-    input: process.stdin,
-    terminal: false
+  input: process.stdin,
+  terminal: false,
 });
 
-process.stdin.setEncoding('utf8');
+process.stdin.setEncoding("utf8");
 
-rl.once('line', line => {
-    const [itemsCount, knapsackCapacity] = line.toString().split(' ').map(Number);
-    const values = [];
-    const weights = [];
-    let count = 0;
+rl.once("line", (line) => {
+  const [itemsCount, knapsackCapacity] = line.toString().split(" ").map(Number);
+  const values = [];
+  const weights = [];
+  let count = 0;
 
-    rl.on('line', line => {
-        const [v, w] = readLine(line);
-        values.push(v);
-        weights.push(w);
+  rl.on("line", (line) => {
+    const [v, w] = readLine(line);
+    values.push(v);
+    weights.push(w);
 
-        if (++count >= itemsCount) {
-            console.log(max(itemsCount, knapsackCapacity, values, weights));
-            process.exit();
-        }
-    });
+    if (++count >= itemsCount) {
+      console.log(max(itemsCount, knapsackCapacity, values, weights));
+      process.exit();
+    }
+  });
 });
 
 function readLine(line) {
-    const v = parseInt(line.toString().split(' ')[0], 10);
-    const w = parseInt(line.toString().split(' ')[1], 10);
+  const v = parseInt(line.toString().split(" ")[0], 10);
+  const w = parseInt(line.toString().split(" ")[1], 10);
 
-    return [v, w];
+  return [v, w];
 }
 
 function max(count, capacity, values, weights) {
   let val = 0;
-  units = values.map((v, i) => [v / weights[i], i]).sort();
-  while (units.length) {
-    if (capacity <= 0) break;
+  const units = values
+    .map((v, i) => [v / weights[i], i])
+    .sort((a, b) => a[0] - b[[0]]);
+  console.log(units);
+  while (units.length && capacity > 0) {
     const [unit, index] = units.pop();
     if (weights[index] <= capacity) {
       capacity -= weights[index];
       val += values[index];
     } else {
-      val += values[index] * capacity / weights[index];
+      val += unit * capacity;
       capacity = 0;
     }
   }
