@@ -38,7 +38,6 @@ function max(count, capacity, values, weights) {
   const units = values
     .map((v, i) => [v / weights[i], i])
     .sort((a, b) => a[0] - b[[0]]);
-  console.log(units);
   while (units.length && capacity > 0) {
     const [unit, index] = units.pop();
     if (weights[index] <= capacity) {
