@@ -16,8 +16,9 @@ rl.once("line", (line) => {
       const n = parseInt(line, 10);
       rl.once("line", (line) => {
         const stops = line
-              .toString()
-              .split(" ").map(v => +v);
+          .toString()
+          .split(" ")
+          .map((v) => +v);
         console.log(car(d, m, n, stops));
         process.exit();
       });
@@ -26,28 +27,24 @@ rl.once("line", (line) => {
 });
 
 function car(d, m, n, stops) {
-  let refill = 0;
-  let last = 0;
-  let temp = m;
+  stops = [0, ...stops, d];
+  // console.log(d, m, n, stops);
   let li = 0;
-  let i = 0;
-  while (i < n) {
-    if (last + temp >= d) {
-      return refill;
+  let i = 1;
+  let ret = 0;
+  while (i < stops.length) {
+    if (stops[i] - stops[li] <= m) {
+      i++;
+      continue;
     }
-    while ((stops[i] - last) <= temp) {
-      temp -= (stops[i] - last);
-      last = stops[i];
-      i += 1;
+    if (li == i - 1) {
+      return -1;
     }
-    if (i == li) {
-      break;
-    }
-    li = i;
-    temp = m;
-    refill += 1;
+    li = i - 1;
+    // console.log("refill at", stops[li]);
+    ret += 1;
   }
-  return -1;
+  return stops[stops.length - 1] - stops[li] <= m ? ret : -1;
 }
 
 module.exports = car;

@@ -29,6 +29,8 @@ rl.once("line", (line) => {
 });
 
 function dotProduct(n, a, b) {
+  a.sort();
+  b.sort();
   const an = [];
   const ap = [];
   const bn = [];
@@ -43,6 +45,8 @@ function dotProduct(n, a, b) {
   });
   an.reverse();
   bn.reverse();
+
+  // console.log(an, ap, bn, bp);
 
   let ret = 0;
   while (an.length && bn.length) ret += an.pop() * bn.pop();
