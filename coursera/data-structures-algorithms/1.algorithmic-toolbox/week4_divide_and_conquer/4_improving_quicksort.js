@@ -19,8 +19,8 @@ rl.once("line", () => {
 });
 
 function shuffle(arr = []) {
-  for (let i = 0; i < arr.length; i++) {
-    const j = Math.floor(arr.length * Math.random());
+  for (let i = arr.length - 1; i >= 0; i--) {
+    const j = Math.floor((i + 1) * Math.random());
     if (i != j) {
       const t = arr[i];
       arr[i] = arr[j];
