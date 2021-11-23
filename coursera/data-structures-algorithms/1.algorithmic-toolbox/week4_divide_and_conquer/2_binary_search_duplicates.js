@@ -35,7 +35,38 @@ rl.once("line", (line) => {
  * @param key number
  */
 function binarySearch(arr = [], key) {
-  // write your code here
+  // console.log(arr, key);
+  let i = -1;
+  let l = 0;
+  let r = arr.length - 1;
+  while (l <= r) {
+    const m = Math.floor((l + r) / 2);
+    if (arr[m] == key) {
+      i = m;
+      break;
+    }
+    if (arr[m] < key) {
+      l = m + 1;
+    } else {
+      r = m - 1;
+    }
+  }
+  // console.log(key, i, l, r);
+  if (i < 0) return i;
+  l = 0;
+  r = arr.length - 1;
+  key -= 0.5;
+  while (l <= r) {
+    const m = Math.floor((l + r) / 2);
+    if (arr[m] == key) return m;
+    if (arr[m] < key) {
+      l = m + 1;
+    } else {
+      r = m - 1;
+    }
+  }
+  // console.log(key, i, l, r);
+  return l;
 }
 
 module.exports = binarySearch;

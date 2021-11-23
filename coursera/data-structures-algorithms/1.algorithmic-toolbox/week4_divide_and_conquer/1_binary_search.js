@@ -37,11 +37,14 @@ rl.once("line", (line) => {
 function binarySearch(arr = [], key) {
   let l = 0;
   let r = arr.length - 1;
-  while (l < r) {
+  while (l <= r) {
     const m = Math.floor((l + r) / 2);
     if (arr[m] == key) return m;
-    if (arr[m] < key) l = m + 1;
-    r = m - 1;
+    if (arr[m] < key) {
+      l = m + 1;
+    } else {
+      r = m - 1;
+    }
   }
   return -1;
 }
