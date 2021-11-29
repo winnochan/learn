@@ -4,6 +4,8 @@ const rl = readline.createInterface({
   terminal: false,
 });
 
+console.log(quickSort3Way([2, 3, 9, 2, 2]));
+
 process.stdin.setEncoding("utf8");
 rl.once("line", () => {
   rl.once("line", (line) => {
@@ -13,7 +15,7 @@ rl.once("line", () => {
       .map((s) => +s.trim());
 
     // console.log(arr.slice(0).sort((a, b) => a - b));
-    console.log(quickSort3Way(arr));
+    // console.log(quickSort3Way(arr));
     process.exit();
   });
 });
@@ -30,18 +32,52 @@ function shuffle(arr = []) {
   return arr;
 }
 
-function partition(arr = [], l, r) {
-  //
+function partition(arr = [], left, right) {
+  const val = arr[left];
+  let mid = left;
+  let temp;
+  while (mid < right) {
+    while (mid < right && arr[left] <= val) {
+      if (arr[left] == val) {
+        mid += 1;
+        arr[left] = arr[mid];
+        arr[mid] = val;
+      } else {
+        left++;
+      }
+    }
+    while (mid < right && arr[right] >= val) {
+      if (arr[right] == val) {
+        mid += 1;
+        arr[right] = arr[mid];
+        arr[mid] = val;
+      } else {
+        right--;
+      }
+    }
+
+    temp = arr[left];
+    arr[left] = arr[right];
+    arr[right] = temp;
+    console.log(arr, left, right);
+  }
+  console.log(left, right);
+  return [left, right];
 }
 
 function quickSort3Way(arr = [], l = 0, r = null) {
   if (r === null) {
     r = arr.length - 1;
     shuffle(arr);
+    console.log("shuffle", arr);
   }
   const [m1, m2] = partition(arr, l, r);
-  quickSort3Way(arr, l, m1 - 1);
-  quickSort3Way(arr, m2 + 1, r);
+  if (l < m1 - 1) {
+    quickSort3Way(arr, l, m1 - 1);
+  }
+  if (m2 < r) {
+    quickSort3Way(arr, m2, r);
+  }
   return arr;
 }
 
