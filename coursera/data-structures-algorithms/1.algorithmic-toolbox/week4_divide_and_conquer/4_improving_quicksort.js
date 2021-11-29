@@ -12,8 +12,8 @@ rl.once("line", () => {
       .split(" ")
       .map((s) => +s.trim());
 
-    console.log(arr.slice(0).sort((a, b) => a - b));
-    console.log(quickSort3Way(shuffle(arr)));
+    // console.log(arr.slice(0).sort((a, b) => a - b));
+    console.log(quickSort3Way(arr));
     process.exit();
   });
 });
@@ -30,12 +30,15 @@ function shuffle(arr = []) {
   return arr;
 }
 
-function partition(arr, l, r) {
+function partition(arr = [], l, r) {
   //
 }
 
 function quickSort3Way(arr = [], l = 0, r = null) {
-  if (r === null) r = arr.length - 1;
+  if (r === null) {
+    r = arr.length - 1;
+    shuffle(arr);
+  }
   const [m1, m2] = partition(arr, l, r);
   quickSort3Way(arr, l, m1 - 1);
   quickSort3Way(arr, m2 + 1, r);
