@@ -15,7 +15,7 @@ rl.once("line", () => {
       .map((s) => +s.trim());
 
     // console.log(arr.slice(0).sort((a, b) => a - b));
-    console.log(quickSort3Way(arr));
+    console.log(quickSort3Way(arr).map(String).join(" "));
     process.exit();
   });
 });
