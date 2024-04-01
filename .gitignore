@@ -4,3 +4,4 @@ rust/**/target
 .idea
 .lift
 *.class
+*.iml
