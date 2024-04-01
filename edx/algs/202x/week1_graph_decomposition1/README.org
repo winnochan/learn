@@ -1,0 +1,2 @@
+* Undirected Graph Definition
+** An undirected Graph is a collection of V of vertices, and a collection of E of edges each of which connects a pair of vertices.
