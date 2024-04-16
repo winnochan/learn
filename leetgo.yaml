@@ -65,7 +65,7 @@ contest:
 editor:
   # Use a predefined editor: vim, vscode, goland
   # Set to 'none' to disable, set to 'custom' to provide your own command and args.
-  use: "custom"
+  use: "none"
   # Custom command to open files.
   command: "emacsclient"
   # Arguments to your custom command.
