@@ -12,7 +12,7 @@ code:
   # Available attributes: Id, Slug, Title, Difficulty, Lang, SlugIsMeaningful
   # (Most questions have descriptive slugs, but some consist of random characters. The SlugIsMeaningful boolean indicates whether a slug is meaningful.)
   # Available functions: lower, upper, trim, padWithZero, toUnderscore, group.
-  filename_template: '{{ .Id | padWithZero 4 }}{{ if .SlugIsMeaningful }}.{{ .Slug }}{{ end }}'
+  filename_template: '{{ .Id | padWithZero 5 }}{{ if .SlugIsMeaningful }}.{{ .Slug }}{{ end }}'
   # Generate question description into a separate question.md file, otherwise it will be embed in the code file.
   separate_description_file: true
   # Default modifiers for all languages.
@@ -20,7 +20,7 @@ code:
     - name: removeUselessComments
   go:
     # Base directory to put generated questions, defaults to the language slug, e.g. go, python, cpp.
-    out_dir: go
+    out_dir: oj/leetcode/go
     # Functions that modify the generated code.
     modifiers:
       - name: removeUselessComments
@@ -29,22 +29,22 @@ code:
       - name: addMod
   python3:
     # Base directory to put generated questions, defaults to the language slug, e.g. go, python, cpp.
-    out_dir: python
+    out_dir: oj/leetcode/python
     # Path to the python executable that creates the venv.
     executable: python3
   cpp:
     # Base directory to put generated questions, defaults to the language slug, e.g. go, python, cpp.
-    out_dir: cpp
+    out_dir: oj/leetcode/cpp
     # C++ compiler
     cxx: g++
     # C++ compiler flags (our Leetcode I/O library implementation requires C++17).
     cxxflags: -O2 -std=c++17
   rust:
     # Base directory to put generated questions, defaults to the language slug, e.g. go, python, cpp.
-    out_dir: rust
+    out_dir: oj/leetcode/rust
   java:
     # Base directory to put generated questions, defaults to the language slug, e.g. go, python, cpp.
-    out_dir: java
+    out_dir: oj/leetcode/java
 leetcode:
   # LeetCode site, https://leetcode.com or https://leetcode.cn
   site: https://leetcode.cn
@@ -56,7 +56,7 @@ leetcode:
     browsers: []
 contest:
   # Base directory to put generated contest questions.
-  out_dir: contest
+  out_dir: oj/leetcode/contest
   # Template to generate filename of the question.
   filename_template: '{{ .ContestShortSlug }}/{{ .Id }}{{ if .SlugIsMeaningful }}.{{ .Slug }}{{ end }}'
   # Open the contest page in browser after generating.
@@ -65,11 +65,11 @@ contest:
 editor:
   # Use a predefined editor: vim, vscode, goland
   # Set to 'none' to disable, set to 'custom' to provide your own command and args.
-  use: "emacsclient -t -a emacs"
+  use: "custom"
   # Custom command to open files.
-  command: ""
+  command: "emacsclient"
   # Arguments to your custom command.
   # String contains {{.CodeFile}}, {{.TestFile}}, {{.DescriptionFile}}, {{.TestCasesFile}} will be replaced with corresponding file path.
   # {{.Folder}} will be substituted with the output directory.
   # {{.Files}} will be substituted with the list of all file paths.
-  args: ""
+  args: "-t -a emacs"
