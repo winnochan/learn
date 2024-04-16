@@ -5,3 +5,5 @@ rust/**/target
 .lift
 *.class
 *.iml
+.ccls-cache/
+.cache/
