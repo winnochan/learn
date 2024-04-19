@@ -26,10 +26,9 @@ public:
   bool remove(int val) {
     if (!umap.count(val)) return false;
     auto index = umap[val];
-    auto final = vec.size() - 1;
-    auto oval = vec[final];
-    swap(vec, index, final);
-    umap[oval] = index;
+    vec[index] = vec.back();
+    umap[vec[index]] = index;
+
     vec.pop_back();
     umap.erase(val);
     return true;
@@ -37,14 +36,6 @@ public:
 
   int getRandom() {
     return vec[rand() % vec.size()];
-  }
-
-  void swap(vector<int>& arr, int i, int j) {
-    if (i != j) {
-      auto temp = arr[i];
-      arr[i] = arr[j];
-      arr[j] = temp;
-    }
   }
 
 private:
