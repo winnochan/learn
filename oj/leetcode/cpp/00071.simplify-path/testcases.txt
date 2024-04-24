@@ -1,0 +1,14 @@
+input:
+"/home/"
+output:
+"/home"
+
+input:
+"/../"
+output:
+"/"
+
+input:
+"/home//foo/"
+output:
+"/home/foo"
