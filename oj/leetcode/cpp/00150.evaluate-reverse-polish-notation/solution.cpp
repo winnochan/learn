@@ -10,40 +10,30 @@ using namespace std;
 
 class Solution {
 public:
-    int evalRPN(vector<string>& tokens) {
-        vector<int> numq;
-        for (const auto& t: tokens) {
-            if (t == "+") {
-                int right = numq.back();
-                numq.pop_back();
-                int left = numq.back();
-                numq.pop_back();
-                numq.push_back(left + right);
-            } else if (t == "-") {
-                int right = numq.back();
-                numq.pop_back();
-                int left = numq.back();
-                numq.pop_back();
-                numq.push_back(left - right);
-            } else if (t == "*") {
-                int right = numq.back();
-                numq.pop_back();
-                int left = numq.back();
-                numq.pop_back();
-                numq.push_back(left * right);
-            } else if (t == "/") {
-                int right = numq.back();
-                numq.pop_back();
-                int left = numq.back();
-                numq.pop_back();
-                numq.push_back(left / right);
-            } else {
-                numq.push_back(stoi(t));
-            }
-        }
-
-        return numq[0];
+  int evalRPN(vector<string> &tokens) {
+    int n;
+    vector<int> numq;
+    for (const auto &t : tokens) {
+      n = numq.size();
+      if (t == "+") {
+        numq[n - 2] += numq[n - 1];
+        numq.pop_back();
+      } else if (t == "-") {
+        numq[n - 2] -= numq[n - 1];
+        numq.pop_back();
+      } else if (t == "*") {
+        numq[n - 2] *= numq[n - 1];
+        numq.pop_back();
+      } else if (t == "/") {
+        numq[n - 2] /= numq[n - 1];
+        numq.pop_back();
+      } else {
+        numq.push_back(stoi(t));
+      }
     }
+
+    return numq[0];
+  }
 };
 
 // @lc code=end
