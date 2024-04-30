@@ -10,54 +10,53 @@ using namespace std;
 
 class UnionFind {
 public:
-    UnionFind(int n) {
-        root.resize(n);
-        for (int i = 0; i < n; i++) {
-            root[i] = i;
-        }
+  UnionFind(int n) {
+    root.resize(n);
+    for (int i = 0; i < n; i++) {
+      root[i] = i;
     }
+  }
 
-    int find(int x) {
-        if (root[x] != x) {
-            root[x] = find(root[x]);
-        }
-        return root[x];
+  int find(int x) {
+    if (root[x] != x) {
+      root[x] = find(root[x]);
     }
+    return root[x];
+  }
 
-    void merge(int x, int y) {
-        int fx = find(x);
-        int fy = find(y);
-        if (fx == fy) return;
-        root[fx] = fy;
-    }
+  void merge(int x, int y) {
+    int fx = find(x);
+    int fy = find(y);
+    if (fx == fy) return;
+    root[fx] = fy;
+  }
 private:
-    vector<int> root;
+  vector<int> root;
 };
 
 class Solution {
 public:
-    int findCircleNum(vector<vector<int>>& isConnected) {
-        int n = isConnected.size();
-        vector<int> flag(n, 0);
-        UnionFind uf(n);
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = i + 1; j < n; j++) {
-                if (isConnected[i][j]) {
-                    uf.merge(i, j);
-                }
-            }
+  int findCircleNum(vector<vector<int>>& isConnected) {
+    int n = isConnected.size();
+    vector<bool> flag(n, false);
+    UnionFind uf(n);
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = i + 1; j < n; j++) {
+        if (isConnected[i][j]) {
+          uf.merge(i, j);
         }
-        for (int i = 0; i < n; i++) {
-            flag[uf.find(i)] = 1;
-        }
-        int ans = 0;
-        for (int i = 0; i < n; i++) {
-            if (flag[i]) {
-                ans++;
-            }
-        }
-        return ans;
+      }
     }
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+      int fi = uf.find(i);
+      if (!flag[fi]) {
+        flag[fi] = true;
+        ans++;
+      }
+    }
+    return ans;
+  }
 };
 
 // @lc code=end
