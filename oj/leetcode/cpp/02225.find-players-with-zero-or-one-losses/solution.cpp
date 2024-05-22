@@ -9,25 +9,23 @@ using namespace std;
 // @lc code=begin
 
 class Solution {
+private:
+  static constexpr int MAXN = 1e5 + 1;
+
 public:
   vector<vector<int>> findWinners(vector<vector<int>> &matches) {
-    int n = matches.size();
-    int maxId = 0;
-    for (const auto &res : matches) {
-      maxId = max({maxId, res[0], res[1]});
-    }
-    vector<bool> users(maxId + 1, false);
-    vector<int> degrees(maxId + 1, 0);
+    int users[MAXN]{0};
+    int degrees[MAXN]{0};
 
     for (const auto &res : matches) {
-      users[res[0]] = true;
-      users[res[1]] = true;
+      users[res[0]] = 1;
+      users[res[1]] = 1;
       degrees[res[1]]++;
     }
 
     vector<int> ans1{};
     vector<int> ans2{};
-    for (int i = 1; i <= maxId; i++) {
+    for (int i = 1; i < MAXN; i++) {
       if (!users[i]) {
         continue;
       }
