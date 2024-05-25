@@ -13,7 +13,20 @@ typedef pair<int, int> PII;
 class Solution {
 public:
     vector<int> mostCompetitive(vector<int>& nums, int k) {
-        return nlogn(nums, k);
+        int n = nums.size();
+
+        vector<int> ans{};
+        for (int i = 0; i < n; i++) {
+            while (ans.size() && nums[i] < ans.back() &&
+                   ans.size() + n - i > k) {
+                ans.pop_back();
+            }
+            if (ans.size() < k) {
+                ans.emplace_back(nums[i]);
+            }
+        }
+
+        return ans;
     }
 
     vector<int> nlogn(vector<int>& nums, int k) {
