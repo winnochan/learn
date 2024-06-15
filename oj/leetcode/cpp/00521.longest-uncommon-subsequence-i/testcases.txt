@@ -1,0 +1,17 @@
+input:
+"aba"
+"cdc"
+output:
+3
+
+input:
+"aaa"
+"bbb"
+output:
+3
+
+input:
+"aaa"
+"aaa"
+output:
+-1
